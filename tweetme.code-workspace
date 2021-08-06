@@ -3,5 +3,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"python.pythonPath": "C:\\Users\\Tohid_Shop\\.virtualenvs\\tweetme2-W7PTcUpv\\Scripts\\python.exe"
+	}
 }
