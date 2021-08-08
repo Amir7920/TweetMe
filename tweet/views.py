@@ -17,10 +17,12 @@ def tweet_list_view(request, *args, **kwargs):
     """
     qs = Tweet.objects.all()
     data = {
+        'isUser': request.user.is_authenticated,
         'response': [
             {'id': x.id, 'content': x.content} for x in qs
         ]
     }
+    
     return JsonResponse(data)
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):

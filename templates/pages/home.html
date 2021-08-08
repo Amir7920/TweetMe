@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to Tweetme 2</h1>
+<div class="row">
+    <h1 class="mx-auto">Welcome to Tweetme 2</h1>
+</div>
+
+<div id="tweets">
+    <h2 class="mx-auto">Loading Tweets...</h2>
+</div>
+
+<script>
+    const tweetsElement = document.getElementById('tweets');
+    
+    const xhr = new XMLHttpRequest();
+    const method = "GET";
+    const url = "/tweets/";
+    const responseType = "json";
+
+    xhr.responseType = responseType;
+    xhr.open(method, url);
+    xhr.onload = function() {
+        // console.log(xhr.response);
+        const serverResponse = xhr.response; 
+        const listedItems = serverResponse['response']; // serverResponse['response']
+        // console.log(listedItems);
+
+        var finalTweetsStr = "";
+        listedItems.forEach((element, index, array) => {
+            finalTweetsStr += '<div class="mb-4 text-center"><h1>' + element.id + '</h1>' + '<p>' + element.content + '</p></div>';
+        });
+        tweetsElement.innerHTML = finalTweetsStr;
+    }
+    xhr.send();
+
+</script>
+
+
+
 {% endblock %}
