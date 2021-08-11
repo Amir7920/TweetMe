@@ -11,11 +11,30 @@
 
 <script>
     const tweetsElement = document.getElementById('tweets');
-    
     const xhr = new XMLHttpRequest();
     const method = "GET";
     const url = "/tweets/";
     const responseType = "json";
+    
+    function handleDidLike(tweet_id, currentCount) {
+
+    }
+
+    function LikeBtn(tweet) {
+
+        return '<button class="btn btn-primary" onclick="handleDidLike(' + tweet.id + ', ' + tweet.likes + ');">Like</button>';
+    }
+    
+    function formatTweetElement(tweet){
+        return '<div class="mb-4 text-center tweet" id-"tweet-' + tweet.id + '">' + 
+                    '<p>' + 
+                        tweet.content +
+                    '</p>' + 
+                    '<div class="btn-group">' + 
+                        LikeBtn(tweet) + 
+                    '</div>'
+                '</div>';
+    }
 
     xhr.responseType = responseType;
     xhr.open(method, url);
@@ -26,8 +45,8 @@
         // console.log(listedItems);
 
         var finalTweetsStr = "";
-        listedItems.forEach((element, index, array) => {
-            finalTweetsStr += '<div class="mb-4 text-center"><h1>' + element.id + '</h1>' + '<p>' + element.content + '</p></div>';
+        listedItems.forEach(tweet => {
+            finalTweetsStr += formatTweetElement(tweet);
         });
         tweetsElement.innerHTML = finalTweetsStr;
     }
